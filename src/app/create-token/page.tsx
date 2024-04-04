@@ -1,16 +1,11 @@
 'use client';
 import { useState, useRef } from 'react';
-import ConnectButton from "@/components/ConnectButton";
-import Header from "@/components/Header";
-// import { useWallet } from "@solana/wallet-adapter-react";
 import Image from "next/image";
 import { toMetaplexFileFromBrowser } from '@metaplex-foundation/js';
 import { createSPLToken } from '@/contexts/createSPLToken';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import LandingHeader from '@/components/LandingHeader/LandingHeader';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { MarketV2, DEVNET_PROGRAM_ID } from '@raydium-io/raydium-sdk';
 import { createMarket } from '@/contexts/createMarket';
 import { PublicKey } from '@solana/web3.js';
 import { revokeMintAuthority } from '@/contexts/revokeMintAuthority';
@@ -20,7 +15,8 @@ import { burnToken } from '@/contexts/burnToken';
 import { ASSOCIATED_TOKEN_PROGRAM_ID, TOKEN_PROGRAM_ID, Token } from '@solana/spl-token';
 import { Snackbar } from '@material-ui/core'
 import Alert from '@material-ui/lab/Alert'
-interface AlertState {
+
+interface IAlertState {
     open: boolean
     message: string
     severity: 'success' | 'info' | 'warning' | 'error' | undefined
@@ -42,28 +38,20 @@ export default function Home() {
     const [tokenDecimal, setTokenDecimal] = useState(9)
     const [tokenBalance, setTokenBalance] = useState(0)
     const [solBalance, setSolBalance] = useState('0')
-    const [alertState, setAlertState] = useState<AlertState>({
+    const [alertState, setAlertState] = useState<IAlertState>({
         open: false,
         message: '',
         severity: undefined,
     })
-    // const [isShowOrigin, setIsShowOrigin] = useState(false);
-    // const wallet = useWallet();
-    // const [loading, setLoading] = useState(false);
-    // const handleNftStake = async () => {
-    //   if (!mint) return;
-    //   try {
-    //     const tx = await stakeNFT(wallet, mint, setLoading);
-    //     if (!tx || !wallet.publicKey) return;
-    //     await stake(tx, wallet.publicKey?.toBase58(), setLoading, getNfts);
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // };
+
     const [step, setStep] = useState(6);
+
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
     const sendLanding = () => {
         router.push('/');
     }
+
     const handleCreateToken = async () => {
 
         if (
@@ -305,12 +293,12 @@ export default function Home() {
         router.push('my-token');
     }
 
-    const fileInputRef = useRef<HTMLInputElement>(null);
     const handleBig = () => {
         if (fileInputRef.current) {
             fileInputRef.current.click();
         }
     };
+
     return (
         <div className="w-full h-full min-h-screen flex items-start pt-6 sm:pt-0 sm:items-center justify-center bg-secondary-200  sm:bg-secondary-300">
             <LandingHeader />

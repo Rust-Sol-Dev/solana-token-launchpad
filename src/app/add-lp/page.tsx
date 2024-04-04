@@ -3,7 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 
 export default function AddLp() {
-    const [tokenBalance, setTokenBalance] = React.useState(2.5);
+    const [tokenBalance, setTokenBalance] = React.useState<number>(2.5);
 
     const handleBalanceChange = (value: string) => {
         setTokenBalance(parseInt(value))

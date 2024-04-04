@@ -1,44 +1,9 @@
 'use client';
-import { useState } from 'react';
-// import { useWallet } from "@solana/wallet-adapter-react";
-import { toMetaplexFileFromBrowser } from '@metaplex-foundation/js';
-import { createSPLToken } from '@/contexts/createSPLToken';
-import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+
 import LandingHeader from '@/components/LandingHeader/LandingHeader';
-import HotTokens from '@/components/HotTokens/HotTokens';
-import DiscoverTokens from '@/components/DiscoverTokens/DiscoverTokens';
-import Banner from '@/components/Banner/Banner';
-import Footer from '@/components/Footer/Footer';
-import FaqMain from '@/components/FaqMain/FaqMain';
-import MyToken from '@/components/MyToken/MyToken';
 import Link from 'next/link';
 
 export default function Home() {
-
-  const wallet = useWallet()
-  const { connection } = useConnection()
-
-  const [tokenName, setTokenName] = useState("")
-  const [tokenSymbol, setTokenSymbol] = useState("")
-  const [tokenLogo, setTokenLogo] = useState<File | null>()
-  const [tokenDecimal, setTokenDecimal] = useState(9)
-  const [tokenBalance, setTokenBalance] = useState(0)
-
-  const handleCreateToken = async () => {
-    if (
-      tokenName != "" &&
-      tokenSymbol != "" &&
-      tokenLogo != null &&
-      tokenBalance != 0
-    ) {
-      if (!wallet.publicKey) return;
-      const _file = await toMetaplexFileFromBrowser(tokenLogo);
-      await createSPLToken(wallet.publicKey, wallet, connection, tokenBalance, tokenDecimal, true, tokenName, tokenSymbol, "", "", _file, "string")
-    } else {
-      alert("Invalid params")
-    }
-  }
-
 
   return (
     <main className='w-full flex flex-col min-w-[100vw] h-full min-h-screen bg-secondary-300'>
