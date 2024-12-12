@@ -1,7 +1,7 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Contact
-Feel free to contact @rust_sol_dev in telegram and rust_sol_dev in discord
+Feel free to contact @rust_sol_dev in telegram and rust_dev_ in discord
 
 ## Getting Started
 
